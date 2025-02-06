@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', [ProductController::class, 'index'])->name('product.index');
 
 Route::get('/home/{name?}',[HomeController::class, 'index'])->name('home.index');
 
-Route::get('/user', function( ){
+Route::get('/user/{name?}', function( $name = null ){
 
-    return view('user');
+    $age = 13;
+    return view('user', compact('name','age')); // ['name' => $name] 와 같다
+
+});
+
+Route::get('/test1',function(){
+    return view('test1', ['name'=>'<b>홍길동</b>','id'=>'<b>길동아!</b>']);
 
 });
