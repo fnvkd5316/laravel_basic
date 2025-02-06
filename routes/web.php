@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,9 @@ Route::get('/test1',function(){
     return view('test1', ['name'=>'<b>홍길동</b>','id'=>'<b>길동아!</b>']);
 
 });
+
+Route::get('/posts', [ClientController::class, 'getAllpost'])->name('posts.getallpost');
+
+Route::get('/posts/{id}', [ClientController::class, 'getPostById'])->name('posts.getpostbyid');
+
+Route::get('/add-post', [ClientController::class, 'addPost'])->name('posts.addpost');
